@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wave Motion | Physics</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Syne:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-base: #010e20;
+      --bg-surface: #0a1324;
+      --bg-surface-alt: #0c182e;
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #fc3700;
+      --accent-secondary: #0015ff;
+      --accent-third: #b
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      margin-top: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      letter-spacing: -1px;
+      margin-bottom: 1rem;
+    }
+.hero h1:hover {
+      text-shadow: 0 0 20px var(--accent-secondary);
+      cursor: default;
+      transition: text-shadow 0.3s ease;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem auto;
+    }
+
+  
+    .wave-visualizer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      height: 100px;
+      margin-top: 2rem;
+    }
+
+    .bar {
+      width: 8px;
+      height: 20px;
+      background-color: var(--orange);
+      border-radius: 4px;
+      animation: oscillate 2s ease-in-out infinite;
+      opacity: 0.8;
+    }
+
+    .bar:nth-child(1) { animation-delay: 0.0s; }
+    .bar:nth-child(2) { animation-delay: 0.1s; height: 30px; }
+    .bar:nth-child(3) { animation-delay: 0.2s; height: 50px; }
+    .bar:nth-child(4) { animation-delay: 0.3s; height: 80px; }
+    .bar:nth-child(5) { animation-delay: 0.4s; height: 100px; }
+    .bar:nth-child(6) { animation-delay: 0.5s; height: 80px; }
+    .bar:nth-child(7) { animation-delay: 0.6s; height: 50px; }
+    .bar:nth-child(8) { animation-delay: 0.7s; height: 30px; }
+    .bar:nth-child(9) { animation-delay: 0.8s; }
+
+    @keyframes oscillate {
+      0%, 100% { transform: scaleY(0.2); opacity: 0.4; }
+      50% { transform: scaleY(1); opacity: 1; box-shadow: 0 0 15px var(--accent); }
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    /* Standard Cards */
+    .card {
+      background-color: var(--bg-surface);
+      padding: 2.5rem;
+      border-radius: 2px;
+      border-left: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      border-left: 2px solid var(--accent);
+      transform: translateX(5px);
+      background-color: var(--bg-surface-alt);
+    }
+
+    .card h2 {
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Section Styling */
+    .section-header {
+      margin-top: 5rem;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding-bottom: 1rem;
+    }
+
+    /* Interactive Accordion for Challenges */
+    details {
+      background-color: var(--bg-surface);
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+      border-radius: 2px;
+      border-left: 2px solid var(--accent-secondary);
+      transition: background-color 0.2s ease;
+    }
+
+    details:hover {
+      background-color: var(--bg-surface-alt);
+    }
+
+    summary {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: '+';
+      color: var(--accent-secondary);
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .answer {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed rgba(255,255,255,0.1);
+      color: var(--text-muted);
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      padding: 2rem;
+      margin-top: 2rem;
+      border-radius: 2px;
+    }
+
+    /* Footer & Credits */
+    .site-footer {
+      margin-top: 6rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      text-align: center;
+    }
+
+    .credit-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      color: white;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .contact-links a:hover {
+      color: var(--accent-secondary);
+      border-bottom: 1px solid var(--accent-secondary);
+    }
+    /* Table Styling */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    .comparison-table th, .comparison-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: left;
+    }
+    .comparison-table th {
+      color: var(--accent);
+      font-family: 'Syne', sans-serif;
+    }
+::selection {
+      background-color: var(--accent); 
+      color: white;
+    }
+   
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <header class="hero">
+      <h1>Wave Motion</h1>
+      <p>The transfer of energy through a medium without the permanent displacement of the medium itself.</p>
+      
+      <div class="wave-visualizer">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+        <div class="card">
+          <h2>Transverse Waves</h2>
+          <p>Particles of the medium vibrate perpendicular to the direction of wave propagation. Examples include light waves and ripples on water.</p>
+        </div>
+        <div class="card">
+          <h2>Longitudinal Waves</h2>
+          <p>Particles of the medium vibrate parallel to the direction of wave propagation. Sound waves traveling through air are a primary example.</p>
+        </div>
+      </div>
+
+      <h2 class="section-header">Real-World Optics & Physics</h2>
+      <div class="grid">
+        <div class="card">
+          <h2>Prisms & Optical Geometry</h2>
+          <p>When light waves enter an equilateral prism under specific angles, they undergo total internal reflection. The light wave is reflected totally from the second surface and emerges perpendicular from the third side, perfectly demonstrating geometric wave behavior.</p>
+        </div>
+        <div class="card">
+          <h2>Seismology</h2>
+          <p>Earthquakes produce two primary types of wave motion: P-waves (longitudinal compressions) and S-waves (transverse shears). Because S-waves cannot travel through liquids, they prove that the Earth's outer core is liquid.</p>
+        </div>
+      </div>
+
+
+
+      <div class="highlight-box">
+        <h3>💡 Did you know?</h3>
+        <p>Waves can interact through superposition. When two crests meet, they undergo constructive interference, combining their amplitudes. In acoustics, this principle is reverse-engineered to create noise-canceling headphones via destructive interference.</p>
+      </div>
+
+<div class="card" style="grid-column: 1 / -1;">
+        <h2>Wave Comparison</h2>
+        <table class="comparison-table">
+          <tr>
+            <th>Feature</th>
+            <th>Transverse Waves</th>
+            <th>Longitudinal Waves</th>
+          </tr>
+          <tr>
+            <td>Particle Movement</td>
+            <td>Perpendicular to wave</td>
+            <td>Parallel to wave</td>
+          </tr>
+          <tr>
+            <td>Examples</td>
+            <td>Light, Water ripples</td>
+            <td>Sound, P-waves</td>
+          </tr>
+          <tr>
+            <td>Structure</td>
+            <td>Crests and Troughs</td>
+            <td>Compressions and Rarefactions</td>
+          </tr>
+        </table>
+      </div>
+
+
+      <h2 class="section-header">Test Your Understanding</h2>
+      
+      <details>
+        <summary>Challenge 1: Kinematics of a Wave</summary>
+        <div class="answer">
+          <strong>Question:</strong> A sound wave travels through air at 343 m/s. If its frequency is 440 Hz (the musical note A), what is its wavelength?<br><br>
+          <strong>Answer:</strong> The wave equation is $v = f \lambda$. Rearranging for wavelength gives $\lambda = \frac{v}{f}$.<br>
+          $\lambda = \frac{343}{440} \approx 0.78$ meters.
+        </div>
+      </details>
+
+      <details>
+        <summary>Challenge 2: The Stadium Wave</summary>
+        <div class="answer">
+          <strong>Question:</strong> When sports fans do "The Wave" in a stadium, is it a transverse or longitudinal wave?<br><br>
+          <strong>Answer:</strong> It is a <strong>transverse wave</strong>. The "energy" of the wave moves horizontally around the stadium, but the medium (the people) move vertically (up and down), which is perpendicular to the direction of travel.
+        </div>
+      </details>
+
+    </main>
+<a href="#" style="display: block; text-align: center; color: var(--accent); margin-top: 2rem;">↑ Back to Top</a>
+    
+
+
+<!-- Footer Credits -->
+    <footer class="site-footer">
+      <div class="credit-text">Designed & Built by Saksham Rauniyar</div>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">All rights reserved.</p>
+      
+      <div class="contact-links">
+        <a href="mailto:srauniyar311@gmail.com">Email</a>
+        <a href="tel:+977 9764456026">Phone</a>
+        <a href="https://github.com/srauniyar-bit" target="_blank">GitHub</a>
+      </div>
+    </footer>
+
+  </div> <!-- This is the existing closing container div -->
+</body>
+</html>
+  </div>
+
+</body>
+</html>
