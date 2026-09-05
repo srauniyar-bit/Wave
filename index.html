@@ -11,14 +11,14 @@
 
   <style>
     :root {
-      --bg-base: #010e20;
+      --bg-base: #051224;
       --bg-surface: #0a1324;
       --bg-surface-alt: #0c182e;
       --text-main: #e2e8f0;
       --text-muted: #94a3b8;
       --accent: #fc3700;
       --accent-secondary: #0015ff;
-      --accent-third: #b
+      --accent-third: #0e92629c;
     }
 
     body {
@@ -247,14 +247,53 @@
       text-align: left;
     }
     .comparison-table th {
-      color: var(--accent);
+      color: var(--accent-third);
       font-family: 'Syne', sans-serif;
     }
 ::selection {
-      background-color: var(--accent); 
+      background-color: var(--accent-third); 
       color: white;
     }
    
+.gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--accent-third), var(--accent));
+      background-size: 200% auto;
+      color: transparent;
+      -webkit-background-clip: text;
+      animation: colorShine 3s linear infinite;
+    }
+    @keyframes colorShine { 
+      to { background-position: 200% center; } 
+    }
+
+    .wave-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      margin-top: 1rem;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      border-radius: 30px;
+      text-decoration: none;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    .wave-btn:hover {
+      background: var(--accent);
+      color: var(--bg-base);
+      box-shadow: 0 0 20px var(--accent);
+      transform: translateY(-3px);
+    }
+.secret-text {
+      color: transparent;
+      text-shadow: 0 0 10px rgba(226, 232, 240, 0.8);
+      transition: all 0.4s ease;
+      cursor: help;
+    }
+    .secret-text:hover {
+      color: var(--accent);
+      text-shadow: none;
+    }
   </style>
 </head>
 <body>
@@ -263,7 +302,7 @@
     
     <header class="hero">
       <h1>Wave Motion</h1>
-      <p>The transfer of energy through a medium without the permanent displacement of the medium itself.</p>
+      <p>The transfer of energy through a medium by vibration of molecules is called wave motion.</p>
       
       <div class="wave-visualizer">
         <div class="bar"></div><div class="bar"></div><div class="bar"></div>
@@ -296,7 +335,7 @@
         </div>
       </div>
 
-
+<h2 class="gradient-text">Electromagnetic Waves</h2>
 
       <div class="highlight-box">
         <h3>💡 Did you know?</h3>
@@ -352,6 +391,11 @@
     </main>
 <a href="#" style="display: block; text-align: center; color: var(--accent); margin-top: 2rem;">↑ Back to Top</a>
     
+<a href="#" class="wave-btn">Explore Physics</a>
+
+
+
+<p>The exact speed of light in a vacuum is <span class="secret-text">299,792,458 m/s</span>.</p> 
 
 
 <!-- Footer Credits -->
