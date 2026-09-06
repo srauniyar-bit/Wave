@@ -383,6 +383,16 @@
             }
         }
     });
+
+window.addEventListener('mousedown', () => {
+   if (gameState === 'PLAYING') {
+    player.jump();
+  }else{
+    init();
+ }
+                                        });
+
+
 </script>
 </body>
 </html>
