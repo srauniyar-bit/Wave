@@ -253,8 +253,8 @@
     }
 
     function spawnObstacle() {
-        if (frames % Math.floor(Math.random() * 60 + 80) === 0) {
-            const type = Math.random() > 0.5 ? 'spike' : 'drone';
+        if (frames % Math.floor(Math.random() * 40 + 50) === 0) {
+            const type = 'spike' ;
             obstacles.push(new Obstacle(type));
         }
     }
