@@ -197,9 +197,9 @@
         draw() {
             ctx.save();
             if (this.type === 'spike') {
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = '#f00';
-                ctx.fillStyle = '#f00';
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#ffff';
+                ctx.fillStyle = '#000';
                 
                 ctx.beginPath();
                 ctx.moveTo(this.x, this.y + this.height);
