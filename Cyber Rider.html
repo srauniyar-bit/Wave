@@ -98,6 +98,7 @@
     let score = 0;
     let gameSpeed = 6;
     let frames = 0;
+    let framesUntilNextSpawn = 0;
     
     // Entities
     let player;
@@ -253,10 +254,11 @@
     }
 
     function spawnObstacle() {
-        if (frames % Math.floor(Math.random() * 40 + 50) === 0) {
-            const type = 'spike' ;
-            obstacles.push(new Obstacle(type));
-        }
+        if (framesUntilNextSpawn <= 0) {
+        obstacles.push(new Obstacle('spike'));
+        framesUntilNextSpawn = Math.floor(Math.random() * 30 + 60); 
+    }
+    framesUntilNextSpawn--;
     }
 
     function drawBackground() {
@@ -304,6 +306,7 @@
         score = 0;
         gameSpeed = 6;
         frames = 0;
+        framesUntilNextSpawn = 0;
         scoreElement.innerText = score;
         messageCenter.classList.add('hidden');
         gameState = 'PLAYING';
@@ -313,7 +316,7 @@
     function gameOver() {
         gameState = 'GAMEOVER';
         messageCenter.classList.remove('hidden');
-        mainText.innerText = "SYSTEM FAILURE";
+        mainText.innerText = "RETRY";
         mainText.style.textShadow = "0 0 5px #f00, 0 0 20px #f00";
         subText.innerText = "Press [SPACE] to Reboot";
         createParticles(player.x + 20, player.y + 20, 30, '#f00');
