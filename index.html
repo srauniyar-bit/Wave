@@ -320,6 +320,35 @@
 
     <main>
 
+<div class="tab-box">
+  <input type="radio" id="tab-overview" name="wave-tab" checked hidden>
+  <input type="radio" id="tab-formulas" name="wave-tab" hidden>
+  
+  <div class="tab-nav">
+    <label for="tab-overview" class="tab-btn btn-ov">Overview</label>
+    <label for="tab-formulas" class="tab-btn btn-fm">Formulas</label>
+  </div>
+  
+  <div class="tab-body body-ov">
+    <p style="margin:0;color:var(--text-muted);font-size:0.9rem;">Waves transfer energy without transferring physical matter permanently across space.</p>
+  </div>
+  <div class="tab-body body-fm">
+    <p style="margin:0;color:var(--text-muted);font-size:0.9rem;">Wave Speed: <code style="color:var(--accent)">v = f × λ</code> | Period: <code style="color:var(--accent)">T = 1 / f</code></p>
+  </div>
+</div>
+
+<style>
+.tab-box{background:var(--bg-surface);padding:1.5rem;margin-top:2rem;border-radius:2px;}
+.tab-nav{display:flex;gap:20px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:8px;}
+.tab-btn{cursor:pointer;font-family:'Syne',sans-serif;font-weight:600;color:var(--text-muted);font-size:0.95rem;padding-bottom:8px;border-bottom:2px solid transparent;margin-bottom:-9px;}
+.tab-body{display:none;}
+#tab-overview:checked ~ .body-ov{display:block;}
+#tab-formulas:checked ~ .body-fm{display:block;}
+#tab-overview:checked ~ .tab-nav .btn-ov{color:var(--accent);border-bottom-color:var(--accent);}
+#tab-formulas:checked ~ .tab-nav .btn-fm{color:var(--accent);border-bottom-color:var(--accent);}
+</style>
+
+
 
       <div class="grid">
         <div class="card">
