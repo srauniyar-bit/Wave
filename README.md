@@ -13,3 +13,7 @@ Waves are a way of transferring energy from one place to another without moving 
 2. I added a buttom at the end of the pages to directly show the wave ripple animation at the top of the page.
 3. I added a cool fact about speed of light in vaccum to show when pointer hovers over the blur value.
 
+## New features added
+1. I made an animated red top preloader bar for visuals which looks more cooler with larger line and red color
+2. I made a toggle switch of overview & formulas to view the concept in which one closes after one is opened 
+
